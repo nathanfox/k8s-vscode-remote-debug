@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Remote Pod",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "1",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "kubectl",
+                "pipeArgs": [
+                    "exec",
+                    "-i",
+                    "-n",
+                    "${env:NAMESPACE}",
+                    "$(kubectl get pod -n ${env:NAMESPACE} -l app=csharp-webapi -o jsonpath='{.items[0].metadata.name}')",
+                    "--"
+                ],
+                "debuggerPath": "/vsdbg/vsdbg",
+                "quoteArgs": false
+            },
+            "sourceFileMap": {
+                "/src/CSharpWebApi": "${workspaceFolder}/src/CSharpWebApi"
+            }
+        }
+    ]
+}

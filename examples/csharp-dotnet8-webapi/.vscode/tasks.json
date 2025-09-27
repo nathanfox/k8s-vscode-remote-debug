@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-docker-debug",
+            "type": "shell",
+            "command": "./manage.sh build",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "./manage.sh deploy",
+            "problemMatcher": [],
+            "dependsOn": ["build-docker-debug"]
+        },
+        {
+            "label": "delete",
+            "type": "shell",
+            "command": "./manage.sh delete",
+            "problemMatcher": []
+        }
+    ]
+}

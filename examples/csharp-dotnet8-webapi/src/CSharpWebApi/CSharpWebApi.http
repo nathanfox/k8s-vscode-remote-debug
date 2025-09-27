@@ -1,0 +1,6 @@
+@CSharpWebApi_HostAddress = http://localhost:5167
+
+GET {{CSharpWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
