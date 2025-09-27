@@ -11,6 +11,50 @@ This repository provides production-ready examples of remote debugging in Kubern
 - **Multiple Languages**: C#, F#, Node.js, Python, Go, and more
 - **Consistent Tooling**: Unified `manage.sh` scripts across all examples
 - **Real-World Integration**: Works with [nginx-dev-gateway](https://github.com/nathanfox/nginx-dev-gateway) for microservices debugging
+- **AI-Assisted Setup**: Reference examples designed to work with coding assistants like Claude Code
+
+## Use Cases
+
+### 1. Learning Remote Debugging
+Follow the examples to understand how remote debugging works for your language/framework.
+
+### 2. Adding Debugging to Your Project
+Use these examples as a reference when setting up remote debugging for your own applications. Each example includes:
+- Complete working code
+- Docker configuration with debugger setup
+- Kubernetes manifests
+- VS Code configuration
+- Management scripts
+- Troubleshooting guides
+
+### 3. AI-Assisted Implementation 🤖
+This repository is structured to work seamlessly with coding assistants like **[Claude Code](https://claude.ai/code)**. You can:
+
+**Example prompt:**
+> "Using the k8s-vscode-remote-debug repository as a reference, add remote debugging support to my Node.js application. I want to debug it running in Kubernetes from local VS Code."
+
+The AI can:
+- Analyze your existing application
+- Reference the appropriate example (e.g., `examples/nodejs-express/`)
+- Generate Dockerfile with debugger setup
+- Create VS Code launch configuration
+- Add Kubernetes manifests with debug ports
+- Provide deployment and debugging instructions
+
+**Why this works:**
+- ✅ **Complete examples** - Every component needed for debugging
+- ✅ **Consistent patterns** - Similar structure across languages
+- ✅ **Well-documented** - Extensive comments and READMEs
+- ✅ **Battle-tested** - All examples verified working
+- ✅ **Troubleshooting included** - Common issues documented
+
+**Supported languages for AI-assisted setup:**
+- C# / ASP.NET Core
+- F# / Giraffe
+- Node.js / Express
+- Python / FastAPI
+- Go / Gin
+- (More coming soon)
 
 ## Features
 

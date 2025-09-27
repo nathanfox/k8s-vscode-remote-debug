@@ -35,58 +35,44 @@ dev-bob/            # Bob's debugging workspace
 └── nginx-gateway
 ```
 
-## Primary Languages/Frameworks
+## Languages & Frameworks
 
-### .NET Ecosystem
-- **C# .NET 8** - ASP.NET Core Web API
-- **F# .NET 8** - Giraffe (functional web framework)
+### Implemented Examples ✅
 
-### Additional Languages/Frameworks for Evaluation
+| Language | Framework | Usage | Debugger | Status |
+|----------|-----------|-------|----------|--------|
+| C# | ASP.NET Core | 16.9% | vsdbg | ✅ Complete |
+| F# | Giraffe | ~1% | vsdbg | ✅ Complete |
+| JavaScript | Express | 17.8% | Inspector | ✅ Complete |
+| Python | FastAPI | ~4% | debugpy | ✅ Complete |
+| Go | Gin | ~5% | Delve | ✅ Complete |
 
-#### Tier 1 - High Priority
-- **Node.js** (Express/Fastify)
-  - Very popular for microservices
-  - Excellent VS Code debugging support
-  - Easy to demonstrate async debugging
+**Current coverage:** ~60-65% of backend developers
 
-- **Python** (FastAPI/Flask)
-  - Widely used in data science and web services
-  - debugpy has strong VS Code integration
-  - Good for showing debugging in async contexts
+### Planned Examples 📋
 
-- **Go**
-  - Increasingly popular for cloud-native applications
-  - Delve debugger with VS Code support
-  - Demonstrates compiled language debugging
+Based on popularity analysis (see [Language & Framework Analysis](language-framework-analysis.md)):
 
-#### Tier 2 - Good Examples
-- **Rust** (Actix-web/Axum)
-  - Growing adoption in systems programming
-  - Shows debugging for performance-critical services
-  - LLDB integration with VS Code
+**Phase 7.1: Java Spring Boot** ⭐⭐⭐⭐⭐
+- **Usage:** 12.7% (largest gap in top 10)
+- **Priority:** CRITICAL
+- **Debugger:** JDWP
+- **Complexity:** Medium
+- **Effort:** 2-3 days
 
-- **Java** (Spring Boot)
-  - Enterprise standard
-  - Excellent JVM debugging tools
-  - Demonstrates debugging in containerized JVM apps
+**Phase 7.2: Kotlin Ktor** ⭐⭐⭐
+- **Usage:** ~1%
+- **Priority:** High (after Java)
+- **Debugger:** JDWP (reuses Java setup)
+- **Complexity:** Low
+- **Effort:** 1 day
 
-#### Tier 3 - Specialized/Emerging
-- **Elixir** (Phoenix)
-  - Functional, concurrent programming model
-  - BEAM VM debugging (erlang debugger)
-  - Interesting for demonstrating OTP debugging
+**Phase 7.3+: Additional Languages**
+- PHP/Laravel (Medium priority, declining)
+- Ruby/Rails (Low priority, declining)
+- Rust/Actix-web (Documented in [Rust Debugging Plan](rust-debugging-plan.md), deferred)
 
-- **TypeScript** (NestJS/Deno)
-  - If separate from Node.js, shows TypeScript-specific debugging
-  - Source map handling
-
-- **Ruby** (Rails/Sinatra)
-  - Still relevant in many organizations
-  - ruby-debug-ide integration
-
-- **Kotlin** (Ktor)
-  - Modern JVM language
-  - Similar to Java debugging but with Kotlin-specific features
+For detailed analysis including usage statistics, complexity assessment, and implementation priorities, see **[Language & Framework Analysis](language-framework-analysis.md)**.
 
 ## Repository Structure
 
