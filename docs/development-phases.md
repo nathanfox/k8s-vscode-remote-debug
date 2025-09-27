@@ -71,14 +71,15 @@ This document outlines the detailed development phases for building out the Kube
 - [x] `tests/README.md` - Test documentation
 
 #### 1.2 Kubernetes Templates
-- [ ] Create `shared/k8s-templates/namespace-template.yaml`
-- [ ] Create reusable ConfigMap templates (if needed)
-- [ ] Document labeling conventions for per-developer namespaces
+- [x] Create `shared/k8s-templates/namespace-template.yaml`
+- [x] Document labeling conventions for per-developer namespaces
+- [x] Create `shared/k8s-templates/README.md` with comprehensive labeling guide
+- [x] Include ResourceQuota and LimitRange in namespace template
 
 #### 1.3 Documentation Templates
-- [ ] Create example README template
-- [ ] Create debugging workflow template
-- [ ] Create troubleshooting guide template
+- [x] Create example README template
+- [x] Create debugging workflow template
+- [x] Create troubleshooting guide template
 
 ### Deliverables
 - Functional root `manage.sh` script

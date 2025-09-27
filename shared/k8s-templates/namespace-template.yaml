@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: NAMESPACE_NAME
+  labels:
+    type: dev-namespace
+    environment: development
+    managed-by: k8s-remote-debug
+  annotations:
+    description: "Developer namespace for remote debugging examples"
+    created-by: "k8s-vscode-remote-debug"
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dev-namespace-quota
+  namespace: NAMESPACE_NAME
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+    persistentvolumeclaims: "5"
+    pods: "20"
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: dev-namespace-limits
+  namespace: NAMESPACE_NAME
+spec:
+  limits:
+  - max:
+      cpu: "2"
+      memory: 4Gi
+    min:
+      cpu: 50m
+      memory: 64Mi
+    default:
+      cpu: 500m
+      memory: 512Mi
+    defaultRequest:
+      cpu: 100m
+      memory: 128Mi
+    type: Container
