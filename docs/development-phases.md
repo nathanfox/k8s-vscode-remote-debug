@@ -195,46 +195,65 @@ This document outlines the detailed development phases for building out the Kube
 
 ---
 
-## Phase 3: F# Giraffe .NET 8 Example
+## Phase 3: F# Giraffe .NET 8 Example ✅
 
 **Goal:** Implement second .NET example, reusing patterns from C#
+
+**Status:** COMPLETED (2025-09-27)
 
 ### Tasks
 
 #### 3.1 Application Code
-- [ ] Create `examples/fsharp-giraffe-dotnet8/` structure
-- [ ] Initialize F# project with Giraffe framework
-  - [ ] Create functional web API with 2-3 routes
-  - [ ] Add route demonstrating debugging scenarios
-  - [ ] Configure for containerization
+- [x] Create `examples/fsharp-giraffe-dotnet8/` structure
+- [x] Initialize F# project with Giraffe framework
+  - [x] Create functional web API with 3 routes (/health, /debug-test, /weatherforecast)
+  - [x] Add route demonstrating debugging scenarios
+  - [x] Configure for containerization
 
 #### 3.2 Docker & Kubernetes
-- [ ] Create Dockerfile (similar to C# example)
-- [ ] Create Kubernetes manifests
-- [ ] Adapt for F# specifics
+- [x] Create Dockerfile (similar to C# example, adapted for F#)
+- [x] Create Kubernetes manifests with F#-specific labels
+- [x] Liveness probe disabled to prevent pod restarts during debugging
 
 #### 3.3 VS Code & Management
-- [ ] Create `.vscode/launch.json` for F#
-- [ ] Create `.vscode/tasks.json`
-- [ ] Create example-specific `manage.sh`
-- [ ] Add F# extensions to recommendations
+- [x] Create `.vscode/launch.json` for F# with input prompts
+- [x] Create `.vscode/tasks.json`
+- [x] Create example-specific `manage.sh`
+- [x] Add F# extensions to recommendations (Ionide-fsharp)
 
 #### 3.4 Documentation
-- [ ] Create example README
-- [ ] Document F#-specific debugging considerations
-- [ ] Note any differences from C# debugging
+- [x] Create example README with F#-specific sections
+- [x] Document F#-specific debugging considerations (functional programming, pipelines, pattern matching)
+- [x] Note Giraffe framework specifics (HttpHandler composition)
+- [x] Document liveness probe issue and solution
 
 #### 3.5 Testing & Validation
-- [ ] Test complete debugging workflow
-- [ ] Validate all success criteria
+- [x] Test complete debugging workflow
+- [x] Built and pushed image to ACR
+- [x] Deployed to Kubernetes successfully
+- [x] All endpoints verified working
+- [x] vsdbg v18.0.10821.2 confirmed installed
 
 ### Deliverables
-- Complete F# Giraffe debugging example
-- Documentation highlighting F# specifics
+- ✅ Complete F# Giraffe debugging example
+- ✅ Documentation highlighting F# specifics and functional debugging
+- ✅ Liveness probe issue documented and fixed
 
 ### Success Criteria
-- Same as Phase 2, but for F#
-- Document any F#-specific debugging nuances
+- ✅ `./manage.sh build` successfully builds F# debug image
+- ✅ `./manage.sh -n nathan deploy` deploys to namespace
+- ✅ `./manage.sh -n nathan debug` verifies pod ready for debugging
+- ✅ VS Code can attach via pipeTransport
+- ✅ F#-specific debugging features documented (closures, pipelines, pattern matching)
+
+### Notes
+- Reused C# patterns successfully for F# implementation
+- Giraffe framework provides functional composition of HTTP handlers
+- Same vsdbg debugger works for both C# and F#
+- **Critical fix**: Disabled liveness probes in both C# and F# examples
+  - Liveness probes kill pods when paused at breakpoints (exit code 137)
+  - Solution: Keep readiness probe, disable liveness probe
+  - Pod marked "Not Ready" when paused, but stays alive for debugging
 
 ---
 
