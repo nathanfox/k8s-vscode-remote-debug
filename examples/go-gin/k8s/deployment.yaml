@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-gin
+  labels:
+    app: go-gin
+    framework: gin
+    language: go
+    version: "1.23"
+    debug-enabled: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-gin
+  template:
+    metadata:
+      labels:
+        app: go-gin
+        framework: gin
+        language: go
+        version: "1.23"
+        debug-enabled: "true"
+    spec:
+      containers:
+      - name: go-gin
+        image: go-gin:latest
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 2345
+          name: debug
+          protocol: TCP
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
