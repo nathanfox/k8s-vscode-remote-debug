@@ -35,27 +35,40 @@ This document outlines the detailed development phases for building out the Kube
 ### Tasks
 
 #### 1.1 Management Scripts
-- [ ] Create root `manage.sh` orchestrator
-  - [ ] Implement argument parsing (`-n`, `-r`, `-t`, `-d` flags)
-  - [ ] Implement namespace resolution (flag > env var > error)
-  - [ ] Add command routing to examples
-  - [ ] Implement help system
-  - [ ] Add version information
+- [x] Create root `manage.sh` orchestrator
+- [x] Implement argument parsing (`-n`, `-r`, `-t`, `-d` flags)
+- [x] Implement namespace resolution (flag > env var > error)
+- [x] Add command routing to examples
+- [x] Implement help system
+- [x] Add version information
 
-- [ ] Create `shared/scripts/common-functions.sh`
-  - [ ] `parse_args()` - Parse command-line flags
-  - [ ] `require_namespace()` - Validate namespace is set
-  - [ ] `log_info()`, `log_error()`, `log_success()` - Logging functions
-  - [ ] `show_help()` template function
-  - [ ] Error handling utilities
+- [x] Create `shared/scripts/common-functions.sh`
+- [x] `parse_args()` - Parse command-line flags
+- [x] `require_namespace()` - Validate namespace is set
+- [x] `log_info()`, `log_error()`, `log_success()` - Logging functions
+- [x] Error handling utilities
+- [x] `confirm_action()` - Interactive confirmation
+- [x] `wait_for_condition()` - Generic wait helper
+- [x] File/directory existence checks
 
-- [ ] Create `shared/scripts/k8s-helpers.sh`
-  - [ ] `get_pod_name()` - Find pod by label
-  - [ ] `wait_for_pod_ready()` - Wait for pod to be running
-  - [ ] `port_forward_pod()` - Set up port forwarding
-  - [ ] `check_namespace_exists()` - Validate namespace
-  - [ ] `create_namespace()` - Create namespace with labels
-  - [ ] `delete_namespace()` - Clean up namespace
+- [x] Create `shared/scripts/k8s-helpers.sh`
+- [x] `get_pod_name()` - Find pod by label
+- [x] `wait_for_pod_ready()` - Wait for pod to be running
+- [x] `wait_for_deployment_ready()` - Wait for deployment
+- [x] `port_forward_pod()` - Set up port forwarding
+- [x] `check_namespace_exists()` - Validate namespace
+- [x] `create_namespace()` - Create namespace with labels
+- [x] `delete_namespace()` - Clean up namespace
+- [x] `exec_in_pod()` - Execute commands in pod
+- [x] `get_pod_logs()` - Retrieve pod logs
+- [x] `apply_manifests()` / `delete_manifests()` - Manage K8s resources
+- [x] `restart_deployment()` - Restart deployments
+
+- [x] Create automated testing framework
+- [x] `tests/test-framework.sh` - Test framework with assertions
+- [x] `tests/run-tests.sh` - Test runner (quick/unit/integration/all)
+- [x] `tests/unit/test-manage-commands.sh` - Unit tests (10/10 passing)
+- [x] `tests/README.md` - Test documentation
 
 #### 1.2 Kubernetes Templates
 - [ ] Create `shared/k8s-templates/namespace-template.yaml`
