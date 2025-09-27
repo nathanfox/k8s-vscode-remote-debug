@@ -26,17 +26,26 @@ Each example demonstrates:
 ## Quick Start
 
 ```bash
-# Set your developer namespace
+# Set your developer namespace (removes need for -n flag)
 export NAMESPACE=dev-yourname
+export REGISTRY=your-registry.azurecr.io  # Or docker.io/username, etc.
 
-# Deploy an example (C# Web API)
-./manage.sh -n $NAMESPACE deploy csharp
+# Build and push example image (C# Web API)
+cd examples/csharp-dotnet8-webapi
+./manage.sh build
+./manage.sh push
 
-# Set up debugging (port-forwarding)
-./manage.sh -n $NAMESPACE debug csharp
+# Deploy to your namespace
+./manage.sh deploy
+
+# Verify pod is ready for debugging
+./manage.sh debug
 
 # Open VS Code and start debugging (F5)
 # Set breakpoints and attach to the remote pod
+
+# Note: -n flag required if NAMESPACE env var not set
+./manage.sh -n dev-yourname deploy
 ```
 
 ## Repository Structure
@@ -89,11 +98,14 @@ This repository promotes a per-developer namespace approach:
 # Each developer has their own namespace
 export NAMESPACE=dev-alice
 
-# Deploy your services to your namespace
-./manage.sh -n $NAMESPACE deploy-all
+# Deploy your services to your namespace (no -n flag needed!)
+./manage.sh deploy-all
 
 # Debug independently without affecting others
-./manage.sh -n $NAMESPACE debug csharp
+./manage.sh debug csharp
+
+# Or use -n flag to override the env var
+./manage.sh -n dev-bob status
 ```
 
 **Benefits:**
@@ -121,9 +133,9 @@ See [docs/nginx-gateway-integration.md](docs/nginx-gateway-integration.md) for d
 ./manage.sh [OPTIONS] COMMAND [ARGS]
 
 OPTIONS:
-    -n, --namespace NAMESPACE   Kubernetes namespace
-    -r, --registry REGISTRY     Docker registry URL
-    -t, --tag TAG              Docker image tag
+    -n, --namespace NAMESPACE   Kubernetes namespace (required if NAMESPACE env var not set)
+    -r, --registry REGISTRY     Docker registry URL (required if REGISTRY env var not set)
+    -t, --tag TAG              Docker image tag (default: latest, or IMAGE_TAG env var)
     -d, --debug                Enable debug output
     -h, --help                 Show help
 
@@ -136,6 +148,14 @@ COMMANDS:
     status                     Show namespace status
     delete                     Delete namespace
     list-examples              List available examples
+
+EXAMPLES:
+    # Using environment variables (recommended)
+    export NAMESPACE=dev-yourname
+    ./manage.sh deploy csharp
+
+    # Using flags (overrides env vars)
+    ./manage.sh -n dev-yourname deploy csharp
 ```
 
 ### Per-Example `manage.sh`
@@ -144,14 +164,31 @@ COMMANDS:
 cd examples/csharp-dotnet8-webapi
 ./manage.sh [OPTIONS] COMMAND
 
+OPTIONS:
+    -n, --namespace NAMESPACE   Kubernetes namespace (required if NAMESPACE env var not set)
+    -r, --registry REGISTRY     Docker registry URL (required if REGISTRY env var not set)
+    -t, --tag TAG              Docker image tag (default: latest, or IMAGE_TAG env var)
+
 COMMANDS:
     build                      Build Docker image
+    push                       Push image to registry
     deploy                     Deploy to namespace
-    debug                      Setup port-forward for debugger
-    logs                       Show logs
+    debug                      Verify pod ready for debugging
+    port-forward [PORT]        Port-forward app port
+    logs [--follow]            Show logs
     delete                     Delete from namespace
     shell                      Exec into pod
+    restart                    Restart deployment
     status                     Show deployment status
+
+EXAMPLES:
+    # Build and deploy with environment variable
+    export NAMESPACE=dev-yourname
+    ./manage.sh build
+    ./manage.sh deploy
+
+    # Or use flags
+    ./manage.sh -n dev-yourname deploy
 ```
 
 ## Documentation
