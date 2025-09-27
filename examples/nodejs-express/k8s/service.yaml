@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-express
+  labels:
+    app: nodejs-express
+    framework: express
+    language: nodejs
+    managed-by: k8s-remote-debug
+spec:
+  selector:
+    app: nodejs-express
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  - name: debug
+    port: 9229
+    targetPort: 9229
+    protocol: TCP
+  type: ClusterIP

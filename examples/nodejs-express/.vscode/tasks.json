@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "docker-build",
+            "type": "shell",
+            "command": "./manage.sh build",
+            "problemMatcher": []
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "./manage.sh deploy",
+            "problemMatcher": []
+        },
+        {
+            "label": "port-forward-debug",
+            "type": "shell",
+            "command": "./manage.sh port-forward-debug",
+            "problemMatcher": [],
+            "isBackground": true
+        },
+        {
+            "label": "port-forward-app",
+            "type": "shell",
+            "command": "./manage.sh port-forward 8080",
+            "problemMatcher": [],
+            "isBackground": true
+        }
+    ]
+}

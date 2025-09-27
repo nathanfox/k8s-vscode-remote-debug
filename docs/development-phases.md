@@ -257,59 +257,90 @@ This document outlines the detailed development phases for building out the Kube
 
 ---
 
-## Phase 4: Node.js Express Example
+## Phase 4: Node.js Express Example ✅
 
 **Goal:** Implement popular Node.js framework with built-in debugging
+
+**Status:** COMPLETED (2025-09-27)
 
 ### Tasks
 
 #### 4.1 Application Code
-- [ ] Create `examples/nodejs-express/` structure
-- [ ] Initialize Node.js/Express project
-  - [ ] Create REST API with 2-3 endpoints
-  - [ ] Add endpoint for debugging demos
-  - [ ] Include async/await examples
-- [ ] Add package.json with debug scripts
+- [x] Create `examples/nodejs-express/` structure
+- [x] Initialize Node.js/Express project
+  - [x] Create REST API with 3 endpoints (/health, /debug-test, /weatherforecast)
+  - [x] Add endpoint for debugging demos with async/await
+  - [x] Include async/await examples with delay loops
+- [x] Add package.json with debug scripts
 
 #### 4.2 Docker Configuration
-- [ ] Create Dockerfile
-  - [ ] Use Node.js base image
-  - [ ] Configure `--inspect=0.0.0.0:9229` for debugging
-  - [ ] Handle node_modules properly
-- [ ] Create .dockerignore
+- [x] Create Dockerfile
+  - [x] Use Node.js 22 Alpine base image
+  - [x] Configure `--inspect=0.0.0.0:9229` for debugging
+  - [x] Handle node_modules properly
+- [x] Create .dockerignore
 
 #### 4.3 Kubernetes Manifests
-- [ ] Create deployment.yaml (expose port 9229)
-- [ ] Create service.yaml
-- [ ] Configure for Node.js specifics
+- [x] Create deployment.yaml (expose port 9229)
+- [x] Create service.yaml
+- [x] Liveness probe disabled to prevent pod restarts during debugging
+- [x] Configure for Node.js specifics (labels: framework=express, version="22")
 
 #### 4.4 VS Code Configuration
-- [ ] Create `.vscode/launch.json`
-  - [ ] Configure Node.js attach via port-forward
-  - [ ] Test with port 9229
-- [ ] Create `.vscode/tasks.json`
-- [ ] Add Node.js extensions
+- [x] Create `.vscode/launch.json`
+  - [x] Configure Node.js attach via port-forward
+  - [x] Set up port 9229 with localRoot/remoteRoot mapping
+- [x] Create `.vscode/tasks.json` (build, deploy, port-forward tasks)
+- [x] Add Node.js extensions (ESLint, Kubernetes)
 
 #### 4.5 Management & Documentation
-- [ ] Create example-specific `manage.sh`
-  - [ ] Implement debug command (port-forward to 9229)
-- [ ] Create README with Node.js debugging guide
-- [ ] Document source map handling (if using TypeScript)
+- [x] Create example-specific `manage.sh`
+  - [x] Implement debug command (port-forward to 9229)
+  - [x] Implement port-forward-debug command
+  - [x] Add optional `-p/--pod` flag for pod selection
+- [x] Create comprehensive README with Node.js debugging guide (475 lines)
+- [x] Document Node.js Inspector Protocol usage
+- [x] Document difference from .NET debugging (port-forward vs pipeTransport)
 
 #### 4.6 Testing & Validation
-- [ ] Test debugging workflow
-- [ ] Validate async debugging
-- [ ] Test with breakpoints in callbacks
+- [x] Test complete debugging workflow
+- [x] Built and pushed image to ACR
+- [x] Deployed to Kubernetes successfully
+- [x] All endpoints verified working
+- [x] Node.js Inspector confirmed listening on port 9229
+- [x] Validate async debugging with breakpoints
+- [x] Test optional `-p/--pod` argument for pod selection
+
+#### 4.7 Pod Selection Enhancement
+- [x] Add optional `-p/--pod` flag to `shared/scripts/common-functions.sh`
+- [x] Update Node.js manage.sh commands to support pod selection:
+  - [x] debug command
+  - [x] port-forward-debug command
+  - [x] port-forward command
+  - [x] logs command
+  - [x] shell command
+- [x] Update help documentation with example usage
+- [x] Test pod selection functionality
 
 ### Deliverables
-- Complete Node.js debugging example
-- Documentation for Node.js Inspector Protocol
+- ✅ Complete Node.js debugging example
+- ✅ Documentation for Node.js Inspector Protocol
+- ✅ Optional pod selection feature for multi-replica scenarios
 
 ### Success Criteria
-- Port-forward to 9229 works
-- VS Code attaches to remote Node process
-- Breakpoints hit in async code
-- Async call stack visible
+- ✅ Port-forward to 9229 works
+- ✅ VS Code attaches to remote Node process
+- ✅ Breakpoints hit in async code
+- ✅ Async call stack visible
+- ✅ Optional `-p/--pod` flag works for explicit pod selection
+
+### Notes
+- Node.js debugging uses port-forward to 9229 (different from .NET's pipeTransport)
+- Node.js Inspector Protocol is TCP-based (network connection)
+- Requires separate port-forward process running
+- Connection reset errors on reconnect are normal and can be ignored
+- Added optional pod selection for scenarios with multiple replicas
+- Auto-detects first pod if `-p` flag not specified
 
 ---
 

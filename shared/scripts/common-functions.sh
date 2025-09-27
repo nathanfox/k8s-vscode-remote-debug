@@ -66,6 +66,11 @@ parse_args() {
                 shift 2
                 ARGS_SHIFT=$((ARGS_SHIFT + 2))
                 ;;
+            -p|--pod)
+                POD_NAME="$2"
+                shift 2
+                ARGS_SHIFT=$((ARGS_SHIFT + 2))
+                ;;
             -d|--debug)
                 DEBUG=1
                 shift

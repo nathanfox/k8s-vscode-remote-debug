@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Remote Pod",
+            "type": "node",
+            "request": "attach",
+            "address": "localhost",
+            "port": 9229,
+            "localRoot": "${workspaceFolder}/src",
+            "remoteRoot": "/app/src",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "restart": true
+        }
+    ]
+}
