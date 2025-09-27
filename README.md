@@ -76,7 +76,7 @@ k8s-vscode-remote-debug/
 | C# | .NET 8 Web API | vsdbg | ✅ Complete |
 | F# | Giraffe .NET 8 | vsdbg | ✅ Complete |
 | Node.js | Express | Inspector Protocol | ✅ Complete |
-| Python | FastAPI | debugpy | 🚧 In Progress |
+| Python | FastAPI | debugpy | ✅ Complete |
 | Go | Gin | Delve | 📋 Planned |
 | Rust | Actix-web | LLDB | 💭 Under Evaluation |
 | Java | Spring Boot | JDWP | 💭 Under Evaluation |
@@ -272,9 +272,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 - ✅ Phase 2: C# .NET 8 Web API example
 - ✅ Phase 3: F# Giraffe .NET 8 example
 - ✅ Phase 4: Node.js Express example
+- ✅ Phase 5: Python FastAPI example
 
 **In Progress:**
-- 🚧 Phase 5: Python FastAPI example
+- 🚧 Phase 6: Go Gin example
 
 See [Development Phases](docs/development-phases.md) for detailed roadmap.
 
