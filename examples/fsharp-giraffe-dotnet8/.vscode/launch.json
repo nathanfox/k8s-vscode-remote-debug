@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Remote Pod",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "1",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "kubectl",
+                "pipeArgs": [
+                    "exec",
+                    "-i",
+                    "-n",
+                    "${input:namespace}",
+                    "${input:podName}",
+                    "--"
+                ],
+                "debuggerPath": "/vsdbg/vsdbg",
+                "quoteArgs": false
+            },
+            "sourceFileMap": {
+                "/src/FSharpGiraffe": "${workspaceFolder}/src/FSharpGiraffe"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "namespace",
+            "type": "promptString",
+            "description": "Kubernetes namespace",
+            "default": "${env:NAMESPACE}"
+        },
+        {
+            "id": "podName",
+            "type": "promptString",
+            "description": "Pod name (use: kubectl get pods -n <namespace> -l app=fsharp-giraffe)"
+        }
+    ]
+}

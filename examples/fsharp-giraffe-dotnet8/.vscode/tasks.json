@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/FSharpGiraffe/FSharpGiraffe.fsproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "docker-build",
+            "type": "shell",
+            "command": "./manage.sh build",
+            "problemMatcher": []
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "./manage.sh -n ${input:namespace} deploy",
+            "problemMatcher": []
+        },
+        {
+            "label": "port-forward",
+            "type": "shell",
+            "command": "./manage.sh -n ${input:namespace} port-forward",
+            "problemMatcher": [],
+            "isBackground": true
+        }
+    ],
+    "inputs": [
+        {
+            "id": "namespace",
+            "type": "promptString",
+            "description": "Kubernetes namespace",
+            "default": "${env:NAMESPACE}"
+        }
+    ]
+}

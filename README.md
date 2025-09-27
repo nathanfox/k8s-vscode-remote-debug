@@ -169,6 +169,41 @@ Each example has its own README with:
 - Troubleshooting guide
 - VS Code configuration details
 
+## Common Issues & Best Practices
+
+### Liveness Probes During Debugging
+
+**Issue**: When debugging with breakpoints, your application stops responding to HTTP requests. If you have a liveness probe configured, Kubernetes will kill the pod after the timeout period, causing the debugger to disconnect with exit code 137.
+
+**Symptoms**:
+```
+Application is shutting down...
+Error from pipe program 'kubectl': command terminated with exit code 137
+```
+
+**Solution**: All examples in this repository have **liveness probes disabled** for debug deployments:
+
+```yaml
+# Liveness probe disabled for debugging to prevent pod restarts when paused at breakpoints
+# livenessProbe:
+#   httpGet:
+#     path: /health
+#     port: 8080
+```
+
+**Why this works**:
+- Readiness probe still runs → pod marked "Not Ready" when paused
+- Pod stays alive → debugger connection maintained
+- No traffic routed to paused pod → requests not affected
+- For production, uncomment liveness probe
+
+### Other Best Practices
+
+- **Use per-developer namespaces** - prevents debug sessions from interfering with teammates
+- **Set NAMESPACE env var** - avoids typing `-n` flag repeatedly
+- **Keep debug builds separate** - use image tags to distinguish debug/production builds
+- **Monitor resource usage** - debug builds use more memory, adjust limits if needed
+
 ## Contributing
 
 This is a **reference repository** intended to demonstrate best practices for K8s remote debugging. We recommend **forking** this repository for your own customization.

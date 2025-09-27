@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: csharp-webapi
+  name: fsharp-giraffe
   labels:
-    app: csharp-webapi
+    app: fsharp-giraffe
     framework: dotnet
-    language: csharp
+    language: fsharp
     version: "8.0"
     debug-enabled: "true"
     managed-by: k8s-remote-debug
@@ -13,19 +13,19 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: csharp-webapi
+      app: fsharp-giraffe
   template:
     metadata:
       labels:
-        app: csharp-webapi
+        app: fsharp-giraffe
         framework: dotnet
-        language: csharp
+        language: fsharp
         version: "8.0"
         debug-enabled: "true"
     spec:
       containers:
-      - name: csharp-webapi
-        image: csharp-webapi:latest
+      - name: fsharp-giraffe
+        image: fsharp-giraffe:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "ionide.ionide-fsharp",
+        "ms-dotnettools.csharp",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ]
+}

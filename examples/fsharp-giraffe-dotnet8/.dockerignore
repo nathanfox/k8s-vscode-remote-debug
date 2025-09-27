@@ -1,0 +1,10 @@
+**/.vscode
+**/bin
+**/obj
+**/.git
+**/.gitignore
+**/README.md
+**/.dockerignore
+**/Dockerfile
+**/k8s
+**/manage.sh
