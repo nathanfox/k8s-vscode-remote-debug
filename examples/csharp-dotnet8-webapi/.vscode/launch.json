@@ -13,8 +13,8 @@
                     "exec",
                     "-i",
                     "-n",
-                    "${env:NAMESPACE}",
-                    "$(kubectl get pod -n ${env:NAMESPACE} -l app=csharp-webapi -o jsonpath='{.items[0].metadata.name}')",
+                    "${input:namespace}",
+                    "${input:podName}",
                     "--"
                 ],
                 "debuggerPath": "/vsdbg/vsdbg",
@@ -23,6 +23,19 @@
             "sourceFileMap": {
                 "/src/CSharpWebApi": "${workspaceFolder}/src/CSharpWebApi"
             }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "namespace",
+            "type": "promptString",
+            "description": "Kubernetes namespace",
+            "default": "${env:NAMESPACE}"
+        },
+        {
+            "id": "podName",
+            "type": "promptString",
+            "description": "Pod name (use: kubectl get pods -n <namespace> -l app=csharp-webapi)"
         }
     ]
 }
