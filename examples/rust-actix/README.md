@@ -253,6 +253,17 @@ This example demonstrates that **structured logging with tracing** is the practi
 
 ---
 
+## Found a Solution?
+
+If you discover a way to make LLDB breakpoints work reliably with async Rust code in Kubernetes, **please let us know!**
+
+- Open an issue at: https://github.com/nathanfox/k8s-vscode-remote-debug/issues
+- Or submit a PR with your solution
+
+We'd love to update this example if the Rust debugging ecosystem improves. The LLDB setup is documented in the appendix below for future reference.
+
+---
+
 ## Appendix: LLDB Investigation
 
 For future reference, here's a summary of our investigation into LLDB-based debugging.

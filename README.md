@@ -130,6 +130,22 @@ k8s-vscode-remote-debug/
 | Rust | Actix-web 4.11 | Tracing | ✅ Complete | Uses structured logging (LLDB breakpoints don't work with async) |
 | Elixir | Phoenix | ElixirLS | 💭 Under Evaluation | |
 
+### Note on Rust Debugging
+
+The Rust example uses a **tracing-based approach** with structured logging instead of traditional breakpoint debugging. After extensive testing, we found that LLDB breakpoints do not work reliably with async Rust code running on Tokio worker threads, even though the debugger infrastructure (attachment, breakpoint resolution) works correctly.
+
+**What we tried:**
+- Regex breakpoints for async closures
+- File-based breakpoint resolution
+- Single-threaded Tokio runtime
+- Manual thread selection
+
+**Result:** All attempts failed to trigger breakpoints in async handlers.
+
+**Solution:** The `tracing` crate provides excellent debugging capabilities for async code through structured logging with the `#[instrument]` macro.
+
+**If you find a solution:** If you discover a way to make LLDB breakpoints work reliably with async Rust in Kubernetes, please open an issue or PR! The LLDB setup is documented in the appendix of the Rust example README for future reference.
+
 ## Prerequisites
 
 - **Kubernetes cluster** (kind, minikube, or cloud provider)
