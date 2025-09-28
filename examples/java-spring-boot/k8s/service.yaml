@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-spring-boot
+  labels:
+    app: java-spring-boot
+spec:
+  selector:
+    app: java-spring-boot
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  - name: debug
+    port: 5005
+    targetPort: 5005
+    protocol: TCP
+  type: ClusterIP

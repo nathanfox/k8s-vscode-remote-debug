@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-spring-boot
+  labels:
+    app: java-spring-boot
+    framework: spring-boot
+    language: java
+    version: "21"
+    debug-enabled: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-spring-boot
+  template:
+    metadata:
+      labels:
+        app: java-spring-boot
+        framework: spring-boot
+        language: java
+        version: "21"
+        debug-enabled: "true"
+    spec:
+      containers:
+      - name: java-spring-boot
+        image: java-spring-boot:latest
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 5005
+          name: debug
+          protocol: TCP
+        env:
+        - name: JAVA_OPTS
+          value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xmx384m"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
