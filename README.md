@@ -55,6 +55,7 @@ The AI can:
 - Python / FastAPI
 - Go / Gin
 - Java / Spring Boot
+- Rust / Actix-web (tracing-based debugging)
 - (More coming soon)
 
 ## Features
@@ -104,6 +105,7 @@ k8s-vscode-remote-debug/
 │   ├── python-fastapi/              # Python with FastAPI
 │   ├── go-gin/                      # Go with Gin
 │   ├── java-spring-boot/            # Java Spring Boot 3.2
+│   ├── rust-actix/                  # Rust Actix-web 4.11
 │   └── ...
 ├── shared/
 │   ├── scripts/                     # Common bash functions
@@ -117,16 +119,16 @@ k8s-vscode-remote-debug/
 
 ## Language Examples
 
-| Language | Framework | Debugger | Status |
-|----------|-----------|----------|--------|
-| C# | .NET 8 Web API | vsdbg | ✅ Complete |
-| F# | Giraffe .NET 8 | vsdbg | ✅ Complete |
-| Node.js | Express | Inspector Protocol | ✅ Complete |
-| Python | FastAPI | debugpy | ✅ Complete |
-| Go | Gin | Delve | ✅ Complete |
-| Java | Spring Boot 3.2 | JDWP | ✅ Complete |
-| Rust | Actix-web | LLDB | 💭 Under Evaluation |
-| Elixir | Phoenix | ElixirLS | 💭 Under Evaluation |
+| Language | Framework | Debugger | Status | Notes |
+|----------|-----------|----------|--------|-------|
+| C# | .NET 8 Web API | vsdbg | ✅ Complete | Full breakpoint support |
+| F# | Giraffe .NET 8 | vsdbg | ✅ Complete | Full breakpoint support |
+| Node.js | Express | Inspector Protocol | ✅ Complete | Full breakpoint support |
+| Python | FastAPI | debugpy | ✅ Complete | Full breakpoint support |
+| Go | Gin | Delve | ✅ Complete | Full breakpoint support |
+| Java | Spring Boot 3.2 | JDWP | ✅ Complete | Full breakpoint support |
+| Rust | Actix-web 4.11 | Tracing | ✅ Complete | Uses structured logging (LLDB breakpoints don't work with async) |
+| Elixir | Phoenix | ElixirLS | 💭 Under Evaluation | |
 
 ## Prerequisites
 
@@ -310,7 +312,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Status
 
-🚀 **Active Development** - Core infrastructure complete, 6 languages implemented.
+🚀 **Active Development** - Core infrastructure complete, 7 languages implemented.
 
 **Completed:**
 - ✅ Phase 0: Repository foundation
@@ -321,6 +323,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 - ✅ Phase 5: Python FastAPI example
 - ✅ Phase 6: Go Gin example
 - ✅ Phase 7.1: Java Spring Boot example
+- ✅ Phase 7.2: Rust Actix-web example (tracing-based approach)
 
 See [Development Phases](docs/development-phases.md) for detailed roadmap.
 
