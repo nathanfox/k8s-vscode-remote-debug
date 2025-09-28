@@ -18,8 +18,9 @@ This document analyzes backend web frameworks and languages by popularity to inf
 | C# | ASP.NET Core | 16.9% | vsdbg | 2025-09-27 |
 | F# | Giraffe | ~1% | vsdbg | 2025-09-27 |
 | Go | Gin | ~5% | Delve | 2025-09-27 |
+| Java | Spring Boot 3.2 | 12.7% | JDWP | 2025-09-28 |
 
-**Coverage:** ~60% of top backend frameworks implemented
+**Coverage:** ~70% of top backend frameworks implemented
 
 ## Framework Rankings by Popularity
 
@@ -37,7 +38,7 @@ This document analyzes backend web frameworks and languages by popularity to inf
 | 2 | Express | JavaScript | 17.8% | ✅ Complete |
 | 3 | ASP.NET Core | C# | 16.9% | ✅ Complete |
 | 4 | Flask | Python | 12.9% | ⚠️ FastAPI similar |
-| 5 | Spring Boot | Java | 12.7% | 📋 **HIGH PRIORITY** |
+| 5 | Spring Boot | Java | 12.7% | ✅ Complete |
 | 6 | Django | Python | 12.0% | ⚠️ FastAPI similar |
 | 7 | Laravel | PHP | ~10% | 💭 Consider |
 | 8 | Ruby on Rails | Ruby | ~5% | 💭 Consider |
@@ -53,7 +54,7 @@ Backend-focused languages:
 | 1 | JavaScript | 62.3% | ✅ Node.js/Express |
 | 2 | Python | 51.0% | ✅ FastAPI |
 | 3 | TypeScript | 38.5% | ⚠️ Via Node.js |
-| 4 | Java | 30.3% | 📋 **Needed** |
+| 4 | Java | 30.3% | ✅ Spring Boot |
 | 5 | C# | 27.1% | ✅ ASP.NET Core |
 | 6 | PHP | 21.2% | 💭 Consider |
 | 7 | Go | 13.5% | ✅ Gin |
@@ -107,27 +108,24 @@ These languages/frameworks represent the most widely used technologies for backe
 - **Status:** ✅ Complete (examples/go-gin)
 - **Notes:** Cloud-native, requires build flags
 
-### Tier 2: Major Enterprise (High Value) ⭐
+### Tier 1.5: Major Enterprise (Recently Completed) ✅
 
-These represent significant gaps in current coverage with high developer demand.
+**Java / Spring Boot** ⭐⭐⭐⭐⭐
 
-#### Java / Spring Boot - **HIGHEST PRIORITY** ⭐⭐⭐⭐⭐
-
-**Why implement:**
+**Implementation details:**
 - **Usage:** 30.3% language, 12.7% Spring Boot
-- **Gap:** Largest missing framework in top 10
+- **Gap filled:** Largest missing framework in top 10
 - **Enterprise adoption:** Dominant in enterprise backend
-- **Job market:** Highest number of backend job postings
 - **Debugging maturity:** JDWP battle-tested, 20+ years
-- **Complexity:** Medium (similar to existing patterns)
+- **Status:** ✅ Complete (examples/java-spring-boot)
 
-**Technical approach:**
+**Technical implementation:**
 - **Debugger:** JDWP (Java Debug Wire Protocol)
 - **Pattern:** Port-forward to debug port 5005
 - **VS Code:** Java Extension Pack (by Microsoft)
-- **Docker:** OpenJDK base image with debug flags
+- **Docker:** Multi-stage Maven build with Eclipse Temurin 21
 - **Build flags:** `-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005`
-- **Spring Boot DevTools:** Optional hot reload support
+- **Memory management:** `-Xmx384m` (75% of container limit)
 
 **Complexity analysis:**
 ```
@@ -137,22 +135,24 @@ Debugger install: ✅ Built into JVM
 VS Code config:   🟢 Simple (JSON-RPC via JDWP)
 Path mapping:     🟢 Automatic (Java Extension handles)
 Debug method:     Port-forward (like Node.js/Python/Go)
-Binary size:      Medium (100-150MB with JDK)
+Binary size:      Medium (200-250MB with JRE)
 Setup time:       ~15 min
 ```
 
-**Estimated implementation effort:** 2-3 days
-- Application code: 0.5 day
-- Docker + K8s: 0.5 day
-- VS Code config: 0.5 day
-- Testing + docs: 1 day
+**Implementation notes:**
+- Multi-stage build with Maven dependency caching
+- Spring Boot Actuator endpoints included
+- Three example controllers (Health, DebugTest, WeatherForecast)
+- Comprehensive troubleshooting guide in README
+- No path mapping required (automatic by Java Extension)
 
 **References:**
-- [VS Code Java Debugging](https://code.visualstudio.com/docs/java/java-debugging)
-- [JDWP Reference](https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/jdwp-spec.html)
-- [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools)
+- Implementation: [examples/java-spring-boot](../examples/java-spring-boot/)
+- Planning doc: [docs/spring-boot-implementation-plan.md](spring-boot-implementation-plan.md)
 
 ---
+
+### Tier 2: Additional Enterprise Options
 
 #### PHP / Laravel ⭐⭐⭐
 
