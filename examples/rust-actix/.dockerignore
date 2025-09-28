@@ -1,0 +1,8 @@
+target/
+.git/
+.vscode/
+k8s/
+*.md
+.dockerignore
+.gitignore
+manage.sh

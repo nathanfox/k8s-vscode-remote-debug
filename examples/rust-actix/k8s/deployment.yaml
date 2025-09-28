@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-actix
+  labels:
+    app: rust-actix
+    framework: actix-web
+    language: rust
+    version: "1.83"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rust-actix
+  template:
+    metadata:
+      labels:
+        app: rust-actix
+        framework: actix-web
+        language: rust
+        version: "1.83"
+    spec:
+      containers:
+      - name: rust-actix
+        image: rust-actix:latest
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
