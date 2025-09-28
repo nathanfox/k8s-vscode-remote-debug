@@ -54,6 +54,7 @@ The AI can:
 - Node.js / Express
 - Python / FastAPI
 - Go / Gin
+- Java / Spring Boot
 - (More coming soon)
 
 ## Features
@@ -102,6 +103,7 @@ k8s-vscode-remote-debug/
 │   ├── nodejs-express/              # Node.js with Express
 │   ├── python-fastapi/              # Python with FastAPI
 │   ├── go-gin/                      # Go with Gin
+│   ├── java-spring-boot/            # Java Spring Boot 3.2
 │   └── ...
 ├── shared/
 │   ├── scripts/                     # Common bash functions
@@ -122,8 +124,8 @@ k8s-vscode-remote-debug/
 | Node.js | Express | Inspector Protocol | ✅ Complete |
 | Python | FastAPI | debugpy | ✅ Complete |
 | Go | Gin | Delve | ✅ Complete |
+| Java | Spring Boot 3.2 | JDWP | ✅ Complete |
 | Rust | Actix-web | LLDB | 💭 Under Evaluation |
-| Java | Spring Boot | JDWP | 💭 Under Evaluation |
 | Elixir | Phoenix | ElixirLS | 💭 Under Evaluation |
 
 ## Prerequisites
@@ -308,7 +310,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Status
 
-🚀 **Active Development** - Core infrastructure complete, C# and F# examples working.
+🚀 **Active Development** - Core infrastructure complete, 6 languages implemented.
 
 **Completed:**
 - ✅ Phase 0: Repository foundation
@@ -318,6 +320,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 - ✅ Phase 4: Node.js Express example
 - ✅ Phase 5: Python FastAPI example
 - ✅ Phase 6: Go Gin example
+- ✅ Phase 7.1: Java Spring Boot example
 
 See [Development Phases](docs/development-phases.md) for detailed roadmap.
 
