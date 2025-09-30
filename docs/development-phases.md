@@ -498,15 +498,31 @@ This document outlines the detailed development phases for building out the Kube
 
 ## Phase 7: Additional Languages (Optional)
 
-### 7.1 Rust (Actix-web)
-- [ ] Evaluate LLDB/GDB remote debugging
-- [ ] Create example if viable
-- [ ] Document complexity vs benefit
+### 7.1 Rust (Actix-web) ✅
+- [x] Evaluate LLDB/GDB remote debugging
+- [x] Create example if viable
+- [x] Document complexity vs benefit
 
-### 7.2 Java (Spring Boot)
-- [ ] Implement with JDWP
-- [ ] Configure JVM debug flags
-- [ ] Test hot code replacement
+**Status:** COMPLETED (2025-09-30)
+
+**Notes:**
+- Successfully implemented using CodeLLDB with LLDB remote debugging
+- Tracing-based logging provides better debugging experience than traditional breakpoints for async Rust
+- Documented both approaches: traditional LLDB debugging and tracing instrumentation
+- Known limitation: GDB has issues with Rust async code; LLDB recommended
+
+### 7.2 Java (Spring Boot) ✅
+- [x] Implement with JDWP
+- [x] Configure JVM debug flags
+- [x] Test hot code replacement
+
+**Status:** COMPLETED (2025-09-30)
+
+**Notes:**
+- Successfully implemented using JDWP (Java Debug Wire Protocol)
+- Port-forwarding to debug port 5005
+- Hot code replacement tested and working for method body changes
+- Uses standard Java debugging workflow similar to Node.js pattern
 
 ### 7.3 Elixir (Phoenix)
 - [ ] Investigate ElixirLS debug adapter
