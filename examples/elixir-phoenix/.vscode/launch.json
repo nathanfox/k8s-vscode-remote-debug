@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Remote Pod",
+            "type": "mix_task",
+            "request": "attach",
+            "projectDir": "${workspaceFolder}",
+            "remoteNode": "elixir_phoenix@pod.debug",
+            "debugAutoInterpretAllModules": false,
+            "debugInterpretModulesPatterns": [
+                "ElixirPhoenixWeb\\.ApiController"
+            ],
+            "requireFiles": [
+                "lib/elixir_phoenix_web/controllers/api_controller.ex"
+            ],
+            "env": {
+                "ELS_ELIXIR_OPTS": "--name elixir_ls_dap@dev.host --cookie debug_cookie_change_me_in_production"
+            }
+        }
+    ]
+}

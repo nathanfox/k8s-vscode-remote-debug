@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "mix_task",
+      "name": "mix phx.server",
+      "request": "launch",
+      "task": "phx.server",
+      "projectDir": "${workspaceRoot}",
+      "debugAutoInterpretAllModules": false,
+      "debugInterpretModulesPatterns": [
+        "^Elixir\\.ElixirPhoenixWeb\\.ApiController$"
+      ],
+      "excludeModules": [
+        "^Elixir\\.Phoenix\\..*",
+        "^Elixir\\.Plug\\..*",
+        "^Elixir\\.Ecto\\..*",
+        "^Elixir\\.DBConnection\\..*",
+        "^Elixir\\.Postgrex\\..*",
+        "^Elixir\\.Telemetry\\..*",
+        "^Elixir\\.Logger\\..*",
+        "^Elixir\\.Bandit\\..*",
+        "^Elixir\\.ThousandIsland\\..*",
+        "^Elixir\\.Mint\\..*",
+        "^Elixir\\.Swoosh\\..*",
+        "^Elixir\\.Finch\\..*",
+        "^Elixir\\.Jason\\..*",
+        "^Elixir\\.ElixirPhoenix\\.Application$",
+        "^Elixir\\.ElixirPhoenixWeb\\.Endpoint$",
+        "^Elixir\\.ElixirPhoenixWeb\\.Router$",
+        "^Elixir\\.ElixirPhoenixWeb\\.Telemetry$",
+        "^Elixir\\.ElixirPhoenixWeb$",
+        "^Elixir\\.ElixirPhoenix$"
+      ],
+      "requireFiles": [
+        "lib/elixir_phoenix_web/controllers/api_controller.ex"
+      ],
+      "exitAfterTaskReturns": false
+    }
+  ]
+}

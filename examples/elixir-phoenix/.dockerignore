@@ -1,0 +1,33 @@
+# Build artifacts
+/_build/
+/deps/
+*.ez
+
+# Generated files
+/priv/static/
+
+# Development/test files
+/test/
+.elixir_ls/
+
+# Git and editors
+.git/
+.gitignore
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation
+README.md
+PLANNING.md
+AGENTS.md
+
+# VS Code
+.vscode/
+
+# Kubernetes
+k8s/
+
+# Scripts
+manage.sh

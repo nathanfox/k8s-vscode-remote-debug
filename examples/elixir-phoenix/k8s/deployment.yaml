@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elixir-phoenix
+  labels:
+    app: elixir-phoenix
+    framework: phoenix
+    language: elixir
+    version: "1.18"
+    debug-enabled: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elixir-phoenix
+  template:
+    metadata:
+      labels:
+        app: elixir-phoenix
+        framework: phoenix
+        language: elixir
+        version: "1.18"
+        debug-enabled: "true"
+    spec:
+      # Add host aliases so pod can resolve dev.host (ElixirLS DAP node)
+      hostAliases:
+      - ip: "127.0.0.1"
+        hostnames:
+        - "dev.host"
+        - "pod.debug"
+      containers:
+      - name: elixir-phoenix
+        image: elixir-phoenix:latest
+        imagePullPolicy: Always
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: 4000
+          name: http
+          protocol: TCP
+        - containerPort: 4369
+          name: epmd
+          protocol: TCP
+        - containerPort: 9000
+          name: debug
+          protocol: TCP
+        env:
+        - name: PORT
+          value: "4000"
+        # PHX_SERVER removed - Phoenix must NOT auto-start for VS Code debugging
+        # Phoenix will be started manually after ElixirLS attaches
+        - name: RELEASE_NODE
+          value: "elixir_phoenix@pod.debug"
+        - name: RELEASE_COOKIE
+          valueFrom:
+            secretKeyRef:
+              name: elixir-phoenix-debug
+              key: erlang-cookie
+        - name: ERL_DIST_PORT
+          value: "9000"
+        - name: ERL_EPMD_PORT
+          value: "4369"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "200m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        # Probes disabled for VS Code debugging workflow
+        # The readiness/liveness probes would trigger Phoenix to auto-start,
+        # but we need Phoenix to wait until AFTER ElixirLS attaches
+        # For production deployments, re-enable these probes
+        # readinessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: 4000
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 10
+        # livenessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: 4000
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 30
