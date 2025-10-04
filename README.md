@@ -56,7 +56,7 @@ The AI can:
 - Go / Gin
 - Java / Spring Boot
 - Rust / Actix-web (tracing-based debugging)
-- (More coming soon)
+- Elixir / Phoenix (Remote - Kubernetes in-pod debugging)
 
 ## Features
 
@@ -106,6 +106,7 @@ k8s-vscode-remote-debug/
 │   ├── go-gin/                      # Go with Gin
 │   ├── java-spring-boot/            # Java Spring Boot 3.2
 │   ├── rust-actix/                  # Rust Actix-web 4.11
+│   ├── elixir-phoenix/              # Elixir Phoenix
 │   └── ...
 ├── shared/
 │   ├── scripts/                     # Common bash functions
@@ -128,7 +129,7 @@ k8s-vscode-remote-debug/
 | Go | Gin | Delve | ✅ Complete | Full breakpoint support |
 | Java | Spring Boot 3.2 | JDWP | ✅ Complete | Full breakpoint support |
 | Rust | Actix-web 4.11 | Tracing | ✅ Complete | Uses structured logging (LLDB breakpoints don't work with async) |
-| Elixir | Phoenix | ElixirLS | 💭 Under Evaluation | |
+| Elixir | Phoenix | ElixirLS (Remote - Kubernetes) | ✅ Complete | In-pod debugging via Remote - Kubernetes extension |
 
 ### Note on Rust Debugging
 
@@ -145,6 +146,25 @@ The Rust example uses a **tracing-based approach** with structured logging inste
 **Solution:** The `tracing` crate provides excellent debugging capabilities for async code through structured logging with the `#[instrument]` macro.
 
 **If you find a solution:** If you discover a way to make LLDB breakpoints work reliably with async Rust in Kubernetes, please open an issue or PR! The LLDB setup is documented in the appendix of the Rust example README for future reference.
+
+### Note on Elixir Debugging
+
+The Elixir example uses the **Remote - Kubernetes extension** approach, running ElixirLS directly inside the pod rather than using distributed Erlang remote attach.
+
+**Why this approach:**
+- Erlang's `:int` module (used for breakpoints) can only interpret modules **before** they're loaded
+- Traditional remote attach fails because Phoenix loads all modules at startup
+- Running ElixirLS in-pod avoids distributed Erlang complexity and timing issues
+
+**Key breakthrough:**
+- Using `^Elixir\.ModuleName$` pattern matching to limit module interpretation
+- Prevents ElixirLS from interpreting 300+ framework modules (causes OOM)
+- Only interprets target modules, reducing memory usage from OOM to ~1Gi
+
+**Features:**
+- Full VS Code integration with breakpoints, variables, stepping
+- Memory-optimized configuration embedded in Docker image
+- Automatic setup via `.vscode-remote/launch.json`
 
 ## Prerequisites
 
@@ -328,7 +348,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Status
 
-🚀 **Active Development** - Core infrastructure complete, 7 languages implemented.
+🚀 **Active Development** - Core infrastructure complete, 8 languages implemented.
 
 **Completed:**
 - ✅ Phase 0: Repository foundation
@@ -340,6 +360,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 - ✅ Phase 6: Go Gin example
 - ✅ Phase 7.1: Java Spring Boot example
 - ✅ Phase 7.2: Rust Actix-web example (tracing-based approach)
+- ✅ Phase 7.3: Elixir Phoenix example (Remote - Kubernetes approach)
 
 See [Development Phases](docs/development-phases.md) for detailed roadmap.
 
